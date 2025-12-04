@@ -1,0 +1,24 @@
+# policies/04-disallow-host-network-port.yaml
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: disallow-host-network-port
+spec:
+  validationFailureAction: Enforce
+  rules:
+  - name: block-host-network
+    match:
+      any:
+      - resources:
+          kinds:
+          - Pod
+    validate:
+      message: "hostNetwork and hostPort are not allowed"
+      deny:
+        conditions:
+          - key: "{{ request.object.spec.hostNetwork || '' }}"
+            operator: Equals
+            value: true
+          - key: "{{ request.object.spec.containers[*].ports[*].hostPort || '' }}"
+            operator: Equals
+            value: ">0"
