@@ -7,4 +7,5 @@ I rebuilt the most important ones on my own kubeadm cluster:
 - Kyverno policy → block `:latest` tag (exactly like the bank)  
 - Tested what happens without limits → immediate OOMKilled
 
-All YAMLs are tested on Kubernetes 1.23.3.
+This repo contains 8 production-grade Kyverno policies I rebuilt from real banking restrictions.
+All tested on my own kubeadm cluster (v1.23.3).
