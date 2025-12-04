@@ -1,0 +1,23 @@
+# policies/08-auto-add-default-limits.yaml  ← Mutate 示例
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: auto-default-limits
+spec:
+  mutation:
+    rules:
+    - name: add-default-limits
+      match:
+        any:
+        - resources:
+            kinds:
+            - Pod
+      mutate:
+        patchStrategicMerge:
+          spec:
+            containers:
+            - "(name)": "*"
+              resources:
+                limits:
+                  memory: "512Mi"
+                  cpu: "500m"
