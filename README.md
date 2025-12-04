@@ -30,7 +30,7 @@ Policy #8 is a **mutate** policy → silently fixes missing limits.
 After leaving the bank environment, I immediately broke my own cluster multiple times by doing things the PaaS never allowed.  
 This lab is the result: now I fully understand why each restriction exists.
 
-Cluster: self-built with kubeadm on Ubuntu 22.04 → Kubernetes v1.30.3  
+Cluster: self-built with kubeadm on Ubuntu 22.04 → Kubernetes v1.23.3  
 Tools: Kyverno v1.12.6 (the current industry standard for policy enforcement)
 
 Feel free to clone and try breaking the rules — you’ll see the exact error messages we never saw in the bank :)
