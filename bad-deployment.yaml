@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bad-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bad
+  template:
+    metadata:
+      labels:
+        app: bad
+    spec:
+      containers:
+      - name: hog
+        image: vish/stress
+        args: ["-cpus", "4", "-mem", "8"]   # 疯狂吃内存
+        # 故意不写 requests/limits
