@@ -1,0 +1,19 @@
+# policies/07-restrict-image-registries.yaml
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: restrict-image-registries
+spec:
+  validationFailureAction: Enforce
+  rules:
+  - name: allowed-registries
+    match:
+      any:
+      - resources:
+          kinds:
+          - Pod
+    validate:
+      message: "Only internal registry allowed"
+      pattern:
+        =(containers) | =(initContainers):
+        - image: "your-company-harbor.com/*"
